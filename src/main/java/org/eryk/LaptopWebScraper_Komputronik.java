@@ -41,12 +41,13 @@ public class LaptopWebScraper_Komputronik extends LaptopWebScraper{
                 for(WebElement item : elements) {
                     try{
                         String title = item.findElement(By.tagName("h2")).getText();
+                        String link = item.findElement((By.cssSelector(".button-a"))).getAttribute("href");
                         String priceText = item.findElement(By.cssSelector(".text-3xl.font-bold.leading-8")).getText();
                         priceText = priceText.replace(" ", "").replace("zł", "");
 
                         int price = Integer.parseInt(priceText);
 
-                        Laptop laptop = new Laptop(title, price);
+                        Laptop laptop = new Laptop(title, price, link);
                         laptops.add(laptop);
                     }
                     catch(Exception ignored){
